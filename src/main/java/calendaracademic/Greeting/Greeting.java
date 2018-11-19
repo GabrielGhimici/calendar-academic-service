@@ -1,4 +1,4 @@
-package app.Greeting;
+package calendaracademic.Greeting;
 
 public class Greeting {
     private final long id;
