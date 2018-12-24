@@ -3,7 +3,7 @@ package calendaracademic.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "\"User\"")
 public class User {
 
     @Id
@@ -20,7 +20,7 @@ public class User {
     @Column(name="rights")
     private short rights;
 
-    @Column(name="pasword")
+    @Column(name="password")
     private long pass;
 
     public long getId() {

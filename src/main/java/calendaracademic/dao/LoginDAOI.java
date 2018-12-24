@@ -1,6 +1,6 @@
 package calendaracademic.dao;
 
-import calendaracademic.model.Password;
+import calendaracademic.model.Passwords;
 import calendaracademic.model.User;
 import calendaracademic.response.Login;
 import calendaracademic.services.JwtService;
@@ -38,14 +38,14 @@ public class LoginDAOI implements LoginDAO {
     @Override
     public boolean get(String username, String pass)
     {
-        Password p = null;
-        String hql = "from Password where hash='";
+        Passwords p = null;
+        String hql = "from Passwords where pass_hashed='";
         hql += pass + "'";
         try {
             Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
             @SuppressWarnings("unchecked")
-            List<Password> list = (List<Password>) query.list();
+            List<Passwords> list = (List<Passwords>) query.list();
 
             if (list != null && !list.isEmpty()) {
                 p = list.get(0);

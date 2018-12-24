@@ -1,7 +1,5 @@
 package calendaracademic.dao;
 
-import calendaracademic.model.Password;
-
 import javax.servlet.http.HttpServletRequest;
 
 public interface LoginDAO {

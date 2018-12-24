@@ -3,11 +3,11 @@ package calendaracademic.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Password")
-public class Password {
+@Table(name = "\"Password\"")
+public class Passwords {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "password_id",nullable = false )
     private long id;
 

@@ -54,7 +54,7 @@ public class ApplicationContextConfig {
     public SessionFactory getSessionFactory(DataSource dSource) {
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dSource);
         sessionBuilder.addProperties(getHibernateProperties());
-        sessionBuilder.scanPackages("app.model");
+        sessionBuilder.scanPackages("calendaracademic.model");
         return sessionBuilder.buildSessionFactory();
     }
 
