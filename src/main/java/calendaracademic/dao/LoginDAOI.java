@@ -2,7 +2,9 @@ package calendaracademic.dao;
 
 import calendaracademic.model.Passwords;
 import calendaracademic.model.User;
+import calendaracademic.response.Details;
 import calendaracademic.response.Login;
+import calendaracademic.services.JwtFilter;
 import calendaracademic.services.JwtService;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -94,11 +96,11 @@ public class LoginDAOI implements LoginDAO {
 
             if (list != null && !list.isEmpty()) {
                 u = list.get(0);
-                hql = "update User set first_login='true' where user_id='" + u.getId() + "'";
+                hql = "update User set first_login='false' where user_id='" + u.getId() + "'";
                 query = sessionFactory.getCurrentSession().createQuery(hql);
                 query.executeUpdate();
 
-                hql = "update Password set pass_hashed='" + pass +"' where user_id='" + u.getPass() + "'";
+                hql = "update Passwords set pass_hashed='" + pass +"' where password_id='" + u.getPass() + "'";
                 query = sessionFactory.getCurrentSession().createQuery(hql);
                 query.executeUpdate();
             }
@@ -119,4 +121,34 @@ public class LoginDAOI implements LoginDAO {
 
         return authHeaderVal;
     }
+
+    @Override
+    public Details getDetails(HttpServletRequest request) {
+
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+        User u = null;
+        Details details = null;
+
+        String hql = "from User where username='";
+        hql += jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+                u = list.get(0);
+
+                details = new Details(u.getUsername(),u.getAffiliation(),u.isFirst_login(), u.getRights());
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return details;
+    }
+
 }

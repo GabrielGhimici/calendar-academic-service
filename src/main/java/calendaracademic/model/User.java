@@ -23,6 +23,9 @@ public class User {
     @Column(name="password")
     private long pass;
 
+    @Column(name="affiliation")
+    private String affiliation;
+
     public long getId() {
         return id;
     }
@@ -61,5 +64,13 @@ public class User {
 
     public void setPass(long pass) {
         this.pass = pass;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
     }
 }

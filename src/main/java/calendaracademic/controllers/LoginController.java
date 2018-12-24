@@ -1,8 +1,11 @@
 package calendaracademic.controllers;
 
 import calendaracademic.dto.AuthDTO;
+import calendaracademic.dto.ChangeDTO;
 import calendaracademic.model.User;
+import calendaracademic.response.Details;
 import calendaracademic.response.Login;
+import calendaracademic.services.JwtFilter;
 import calendaracademic.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,4 +35,31 @@ public class LoginController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
+    @PostMapping(value = "/service/firstLogin")
+    public ResponseEntity<?> firstLogging(@RequestBody ChangeDTO change, HttpServletRequest request)
+    {
+        if (loginDAO.setPassword (request,change.getPassword()))
+            return ResponseEntity.ok("OK");
+        else
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping(value = "/service/logout")
+    public ResponseEntity<?> logout (HttpServletRequest request)
+    {
+        JwtFilter.logout(loginDAO.logout(request));
+        return ResponseEntity.ok("OK");
+    }
+
+    @GetMapping(value = "/service/details")
+    public ResponseEntity<?> getdescription (HttpServletRequest request)
+    {
+        Details d = loginDAO.getDetails(request);
+        if (d != null)
+        {
+            return ResponseEntity.ok(d);
+        }
+        else
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
 }

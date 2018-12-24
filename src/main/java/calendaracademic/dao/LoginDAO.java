@@ -1,5 +1,7 @@
 package calendaracademic.dao;
 
+import calendaracademic.response.Details;
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface LoginDAO {
@@ -9,4 +11,6 @@ public interface LoginDAO {
     boolean setPassword (HttpServletRequest request, String pass);
 
     String logout(HttpServletRequest request);
+
+    Details getDetails (HttpServletRequest request);
 }
