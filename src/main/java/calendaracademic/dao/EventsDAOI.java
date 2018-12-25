@@ -1,6 +1,6 @@
 package calendaracademic.dao;
 
-import calendaracademic.POJO.EventsPOJO;
+import calendaracademic.POJO.*;
 import calendaracademic.dto.InvitationDTO;
 import calendaracademic.model.*;
 import calendaracademic.response.Invitations;
@@ -393,4 +393,252 @@ public class EventsDAOI implements EventsDAO{
         return true;
     }
 
+    public NormalEventsPOJO[] getNormalEvents(HttpServletRequest request) {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        String hql = "from User where username = '" + jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+
+                hql = "from Participation where user = '" + list.get(0).getId() + "' and normal_event is not null";
+                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                @SuppressWarnings("unchecked")
+                List<Participation> list2 = (List<Participation>) query.list();
+
+                if (list2 != null && !list2.isEmpty()) {
+
+                    NormalEventsPOJO[] vect = new NormalEventsPOJO[list2.size()];
+
+                    for(int cnt = 0; cnt < list2.size(); cnt++) {
+
+                        hql = "from Normal_Event where event_id = '" + list2.get(cnt).getNormal_event() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<Normal_Event> list3 = (List<Normal_Event>) query.list();
+
+                        NormalEventsPOJO e = new NormalEventsPOJO();
+                        e.setEnd_date(list3.get(0).getEnd_date());
+                        e.setEnd_hour(list2.get(cnt).getOwn_end_time());
+                        e.setStart_date(list3.get(0).getStart_date());
+                        e.setStart_hour(list2.get(cnt).getOwn_start_time());
+                        e.setEvent_description(list3.get(0).getDescription());
+                        e.setLocation(list3.get(0).getLocation());
+                        e.setName(list3.get(0).getName());
+
+                        vect[cnt] = e;
+                    }
+
+                    return vect;
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return null;
+    }
+
+    public PrivateEventsPOJO[] getPrivateEvents(HttpServletRequest request)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        String hql = "from User where username = '" + jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+
+                hql = "from Participation where user = '" + list.get(0).getId() + "' and private_event is not null";
+                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                @SuppressWarnings("unchecked")
+                List<Participation> list2 = (List<Participation>) query.list();
+
+                if (list2 != null && !list2.isEmpty()) {
+
+                    PrivateEventsPOJO[] vect = new PrivateEventsPOJO[list2.size()];
+
+                    for(int cnt = 0; cnt < list2.size(); cnt++) {
+
+                        hql = "from Private_Event where event_id = '" + list2.get(cnt).getPrivate_event() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<Private_Event> list3 = (List<Private_Event>) query.list();
+
+                        PrivateEventsPOJO e = new PrivateEventsPOJO();
+                        e.setEnd_date(list3.get(0).getEnd_date());
+                        e.setEnd_hour(list2.get(cnt).getOwn_end_time());
+                        e.setStart_date(list3.get(0).getStart_date());
+                        e.setStart_hour(list2.get(cnt).getOwn_start_time());
+                        e.setEvent_description(list3.get(0).getDescription());
+                        e.setLocation(list3.get(0).getLocation());
+                        e.setName(list3.get(0).getName());
+
+                        hql = "from User where user_id = '" + list3.get(0).getOwner() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<User> list4 = (List<User>) query.list();
+
+                        if (list4 != null && !list4.isEmpty()) {
+                            String aux = list4.get(0).getUsername().replace(".", " ");
+                            aux = aux.substring(0, aux.lastIndexOf("@"));
+                            e.setOwner(aux);
+                        }
+
+                        vect[cnt] = e;
+                    }
+
+                    return vect;
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return null;
+    }
+
+
+    public PrivateRecurentEventsPOJO[] getPrivateRecurentEvents(HttpServletRequest request)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        String hql = "from User where username = '" + jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+
+                hql = "from Participation where user = '" + list.get(0).getId() + "' and private_recurent_event is not null";
+                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                @SuppressWarnings("unchecked")
+                List<Participation> list2 = (List<Participation>) query.list();
+
+                if (list2 != null && !list2.isEmpty()) {
+
+                    PrivateRecurentEventsPOJO[] vect = new PrivateRecurentEventsPOJO[list2.size()];
+
+                    for(int cnt = 0; cnt < list2.size(); cnt++) {
+
+                        hql = "from Private_Recurent_Event where event_id = '" + list2.get(cnt).getPrivate_recurent_event() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<Private_Recurent_Event> list3 = (List<Private_Recurent_Event>) query.list();
+
+                        PrivateRecurentEventsPOJO e = new PrivateRecurentEventsPOJO();
+                        e.setEnd_date(list3.get(0).getEnd_date());
+                        e.setEnd_hour(list2.get(cnt).getOwn_end_time());
+                        e.setStart_date(list3.get(0).getStart_date());
+                        e.setStart_hour(list2.get(cnt).getOwn_start_time());
+                        e.setEvent_description(list3.get(0).getDescription());
+                        e.setLocation(list3.get(0).getLocation());
+                        e.setName(list3.get(0).getName());
+
+                        hql = "from User where user_id = '" + list3.get(0).getOwner() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<User> list4 = (List<User>) query.list();
+
+                        if (list4 != null && !list4.isEmpty()) {
+                            String aux = list4.get(0).getUsername().replace(".", " ");
+                            aux = aux.substring(0, aux.lastIndexOf("@"));
+                            e.setOwner(aux);
+                        }
+
+                        e.setFrequency(list3.get(0).getFrequency());
+                        e.setRecurring_days(list3.get(0).getRecurring_days());
+
+                        vect[cnt] = e;
+                    }
+
+                    return vect;
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return null;
+    }
+
+    public RecurentEventsPOJO[] getRecurentEvents(HttpServletRequest request)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        String hql = "from User where username = '" + jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+
+                hql = "from Participation where user = '" + list.get(0).getId() + "' and recurent_event is not null";
+                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                @SuppressWarnings("unchecked")
+                List<Participation> list2 = (List<Participation>) query.list();
+
+                if (list2 != null && !list2.isEmpty()) {
+
+                    RecurentEventsPOJO[] vect = new RecurentEventsPOJO[list2.size()];
+
+                    for(int cnt = 0; cnt < list2.size(); cnt++) {
+
+                        hql = "from Recurent_Event where event_id = '" + list2.get(cnt).getRecurent_event() + "'";
+                        query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                        @SuppressWarnings("unchecked")
+                        List<Recurent_Event> list3 = (List<Recurent_Event>) query.list();
+
+                        RecurentEventsPOJO e = new RecurentEventsPOJO();
+                        e.setEnd_date(list3.get(0).getEnd_date());
+                        e.setEnd_hour(list2.get(cnt).getOwn_end_time());
+                        e.setStart_date(list3.get(0).getStart_date());
+                        e.setStart_hour(list2.get(cnt).getOwn_start_time());
+                        e.setEvent_description(list3.get(0).getDescription());
+                        e.setLocation(list3.get(0).getLocation());
+                        e.setName(list3.get(0).getName());
+                        e.setFrequency(list3.get(0).getFrequency());
+                        e.setRecurring_days(list3.get(0).getRecurring_days());
+
+                        vect[cnt] = e;
+                    }
+
+                    return vect;
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return null;
+    }
 }

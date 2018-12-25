@@ -1,5 +1,9 @@
 package calendaracademic.controllers;
 
+import calendaracademic.POJO.NormalEventsPOJO;
+import calendaracademic.POJO.PrivateEventsPOJO;
+import calendaracademic.POJO.PrivateRecurentEventsPOJO;
+import calendaracademic.POJO.RecurentEventsPOJO;
 import calendaracademic.dao.EventsDAO;
 import calendaracademic.dto.InvitationDTO;
 import calendaracademic.response.Invitations;
@@ -47,5 +51,22 @@ public class EventsController {
         else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping(value = "/service/events")
+    public ResponseEntity<?> showEvents (HttpServletRequest request)
+    {
+        NormalEventsPOJO[] joNE = EventsDAO.getNormalEvents(request);
+        PrivateEventsPOJO[] joPE = EventsDAO.getPrivateEvents(request);
+        PrivateRecurentEventsPOJO[] joPRE = EventsDAO.getPrivateRecurentEvents(request);
+        RecurentEventsPOJO[] joRE = EventsDAO.getRecurentEvents(request);
+
+        Map maping = new HashMap<String,String>();
+        maping.put("NormalEvents",  joNE);
+        maping.put("PrivateEvents",  joPE);
+        maping.put("PrivateRecurentEvents",  joPRE);
+        maping.put("RecurentEvents",  joRE);
+
+        return ResponseEntity.ok(maping);
     }
 }

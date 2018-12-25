@@ -1,5 +1,9 @@
 package calendaracademic.dao;
 
+import calendaracademic.POJO.NormalEventsPOJO;
+import calendaracademic.POJO.PrivateEventsPOJO;
+import calendaracademic.POJO.PrivateRecurentEventsPOJO;
+import calendaracademic.POJO.RecurentEventsPOJO;
 import calendaracademic.dto.InvitationDTO;
 import calendaracademic.response.Invitations;
 
@@ -11,4 +15,11 @@ public interface EventsDAO {
 
     boolean respond(InvitationDTO inv);
 
+    NormalEventsPOJO[] getNormalEvents(HttpServletRequest request);
+
+    PrivateEventsPOJO[] getPrivateEvents(HttpServletRequest request);
+
+    PrivateRecurentEventsPOJO[] getPrivateRecurentEvents(HttpServletRequest request);
+
+    RecurentEventsPOJO[] getRecurentEvents(HttpServletRequest request);
 }
