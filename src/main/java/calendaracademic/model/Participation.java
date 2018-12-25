@@ -7,21 +7,20 @@ import javax.persistence.*;
 public class Participation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "participation_id",nullable = false )
-    private long id;
+    private Long participation_id;
 
     @Column(name = "recurent_event")
-    private long recurent_event;
+    private Long recurent_event;
 
     @Column(name = "private_event")
-    private long private_event;
+    private Long private_event;
 
     @Column(name = "normal_event")
-    private long normal_event;
+    private Long normal_event;
 
     @Column(name = "private_recurent_event")
-    private long private_recurent_event;
+    private Long private_recurent_event;
 
     @Column(name = "preffered")
     private boolean preffered;
@@ -32,22 +31,22 @@ public class Participation {
     @Column(name = "own_end_time")
     private String own_end_time;
 
-    @Column(name = "user")
-    private long user;
+    @Column(name = "\"user\"")
+    private Long user;
 
-    public long getId() {
-        return id;
+    public Long getParticipation_id() {
+        return participation_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setParticipation_id(Long participation_id) {
+        this.participation_id = participation_id;
     }
 
     public long getRecurent_event() {
         return recurent_event;
     }
 
-    public void setRecurent_event(long recurent_event) {
+    public void setRecurent_event(Long recurent_event) {
         this.recurent_event = recurent_event;
     }
 
@@ -55,7 +54,7 @@ public class Participation {
         return private_event;
     }
 
-    public void setPrivate_event(long private_event) {
+    public void setPrivate_event(Long private_event) {
         this.private_event = private_event;
     }
 
@@ -63,7 +62,7 @@ public class Participation {
         return normal_event;
     }
 
-    public void setNormal_event(long normal_event) {
+    public void setNormal_event(Long normal_event) {
         this.normal_event = normal_event;
     }
 
@@ -71,7 +70,7 @@ public class Participation {
         return private_recurent_event;
     }
 
-    public void setPrivate_recurent_event(long private_recurent_event) {
+    public void setPrivate_recurent_event(Long private_recurent_event) {
         this.private_recurent_event = private_recurent_event;
     }
 
@@ -99,11 +98,11 @@ public class Participation {
         this.own_end_time = own_end_time;
     }
 
-    public long getUser() {
+    public Long getUser() {
         return user;
     }
 
-    public void setUser(long user) {
+    public void setUser(Long user) {
         this.user = user;
     }
 }
