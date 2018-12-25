@@ -1,7 +1,5 @@
 package calendaracademic.response;
 
-import java.security.SecureRandom;
-
 public class Login {
 
     public Login(){}

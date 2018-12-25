@@ -4,7 +4,6 @@ import calendaracademic.model.Passwords;
 import calendaracademic.model.User;
 import calendaracademic.response.Details;
 import calendaracademic.response.Login;
-import calendaracademic.services.JwtFilter;
 import calendaracademic.services.JwtService;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Repository

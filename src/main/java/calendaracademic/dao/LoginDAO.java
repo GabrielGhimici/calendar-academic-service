@@ -1,7 +1,6 @@
 package calendaracademic.dao;
 
 import calendaracademic.response.Details;
-
 import javax.servlet.http.HttpServletRequest;
 
 public interface LoginDAO {

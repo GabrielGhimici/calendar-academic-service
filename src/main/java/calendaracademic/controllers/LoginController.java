@@ -2,7 +2,6 @@ package calendaracademic.controllers;
 
 import calendaracademic.dto.AuthDTO;
 import calendaracademic.dto.ChangeDTO;
-import calendaracademic.model.User;
 import calendaracademic.response.Details;
 import calendaracademic.response.Login;
 import calendaracademic.services.JwtFilter;
