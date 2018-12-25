@@ -15,16 +15,16 @@ public class Invitation {
     private long user;
 
     @Column(name = "recurent_event")
-    private long recurent_event;
+    private Long recurent_event;
 
     @Column(name = "private_event")
-    private long private_event;
+    private Long private_event;
 
     @Column(name = "normal_event")
-    private long normal_event;
+    private Long normal_event;
 
     @Column(name = "private_recurent_event")
-    private long private_recurent_event;
+    private Long private_recurent_event;
 
     public long getId() {
         return id;
@@ -42,35 +42,35 @@ public class Invitation {
         this.user = user;
     }
 
-    public long getRecurent_event() {
+    public Long getRecurent_event() {
         return recurent_event;
     }
 
-    public void setRecurent_event(long recurent_event) {
+    public void setRecurent_event(Long recurent_event) {
         this.recurent_event = recurent_event;
     }
 
-    public long getPrivate_event() {
+    public Long getPrivate_event() {
         return private_event;
     }
 
-    public void setPrivate_event(long private_event) {
+    public void setPrivate_event(Long private_event) {
         this.private_event = private_event;
     }
 
-    public long getNormal_event() {
+    public Long getNormal_event() {
         return normal_event;
     }
 
-    public void setNormal_event(long normal_event) {
+    public void setNormal_event(Long normal_event) {
         this.normal_event = normal_event;
     }
 
-    public long getPrivate_recurent_event() {
+    public Long getPrivate_recurent_event() {
         return private_recurent_event;
     }
 
-    public void setPrivate_recurent_event(long private_recurent_event) {
+    public void setPrivate_recurent_event(Long private_recurent_event) {
         this.private_recurent_event = private_recurent_event;
     }
 }
