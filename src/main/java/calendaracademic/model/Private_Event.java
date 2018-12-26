@@ -10,7 +10,7 @@ public class Private_Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id",nullable = false )
-    private long id;
+    private Long id;
 
     @Column(name = "name", columnDefinition = "text")
     private String name;
@@ -34,13 +34,13 @@ public class Private_Event {
     private Date end_date;
 
     @Column(name = "owner")
-    private long owner;
+    private Long owner;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -100,11 +100,11 @@ public class Private_Event {
         this.end_date = end_date;
     }
 
-    public long getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(long owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 }
