@@ -1,7 +1,7 @@
 package calendaracademic.dao;
 
 import calendaracademic.POJO.*;
-import calendaracademic.dto.InvitationDTO;
+import calendaracademic.dto.*;
 import calendaracademic.model.*;
 import calendaracademic.response.Invitations;
 import calendaracademic.response.Login;
@@ -640,5 +640,213 @@ public class EventsDAOI implements EventsDAO{
         }
 
         return null;
+    }
+
+    public boolean setNormalEvents(HttpServletRequest request, NormalEventDTO event)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        Normal_Event e = new Normal_Event();
+        e.setDescription(event.getEvent_description());
+        e.setEnd_date(event.getEnd_date());
+        e.setEnd_time(event.getEnd_hour());
+        e.setStart_date(event.getStart_date());
+        e.setStart_time(event.getStart_hour());
+        e.setLocation(event.getLocation());
+        e.setName(event.getName());
+
+        try {
+            String hql = "select MAX(id) from Normal_Event";
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setId(((Long) query.list().get(0)) + 1);
+
+            sessionFactory.getCurrentSession().save(e);
+
+            Participation p = new Participation();
+            p.setNormal_event(e.getId());
+            p.setOwn_end_time(event.getEnd_hour());
+            p.setOwn_start_time(event.getStart_hour());
+            p.setPreffered(true);
+
+            hql = "from User where username = '" + jwtUser.getUserName() + "'";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setUser(((User) query.list().get(0)).getId());
+
+            hql = "select MAX(participation_id) from Participation";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setParticipation_id((Long) query.list().get(0) + 1);
+
+            sessionFactory.getCurrentSession().save(p);
+
+
+        }catch (Exception ex)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean setPrivateEvents(HttpServletRequest request, PrivateEventDTO event)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        Private_Event e = new Private_Event();
+        e.setDescription(event.getEvent_description());
+        e.setEnd_date(event.getEnd_date());
+        e.setEnd_time(event.getEnd_hour());
+        e.setStart_date(event.getStart_date());
+        e.setStart_time(event.getStart_hour());
+        e.setLocation(event.getLocation());
+        e.setName(event.getName());
+
+        try {
+            String hql = "select MAX(id) from Private_Event";
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setId(((Long) query.list().get(0)) + 1);
+
+            hql = "from User where username = '" + jwtUser.getUserName() + "'";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setOwner(((User) query.list().get(0)).getId());
+
+            sessionFactory.getCurrentSession().save(e);
+
+            Participation p = new Participation();
+            p.setPrivate_event(e.getId());
+            p.setOwn_end_time(event.getEnd_hour());
+            p.setOwn_start_time(event.getStart_hour());
+            p.setPreffered(true);
+
+            p.setUser(((User) query.list().get(0)).getId());
+
+            hql = "select MAX(participation_id) from Participation";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setParticipation_id((Long) query.list().get(0) + 1);
+
+            sessionFactory.getCurrentSession().save(p);
+
+
+        }catch (Exception ex)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean setPrivateRecurentEvents(HttpServletRequest request, PrivateRecurentEventDTO event)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        Private_Recurent_Event e = new Private_Recurent_Event();
+        e.setDescription(event.getEvent_description());
+        e.setEnd_date(event.getEnd_date());
+        e.setEnd_time(event.getEnd_hour());
+        e.setStart_date(event.getStart_date());
+        e.setStart_time(event.getStart_hour());
+        e.setLocation(event.getLocation());
+        e.setName(event.getName());
+        e.setFrequency(event.getFrequency());
+        e.setRecurring_days(event.getRecurring_days().toLowerCase());
+
+        try {
+            String hql = "select MAX(id) from Private_Recurent_Event";
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setId(((Long) query.list().get(0)) + 1);
+
+            hql = "from User where username = '" + jwtUser.getUserName() + "'";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setOwner(((User) query.list().get(0)).getId());
+
+            sessionFactory.getCurrentSession().save(e);
+
+            Participation p = new Participation();
+            p.setPrivate_recurent_event(e.getId());
+            p.setOwn_end_time(event.getEnd_hour());
+            p.setOwn_start_time(event.getStart_hour());
+            p.setPreffered(true);
+
+            p.setUser(((User) query.list().get(0)).getId());
+
+            hql = "select MAX(participation_id) from Participation";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setParticipation_id((Long) query.list().get(0) + 1);
+
+            sessionFactory.getCurrentSession().save(p);
+
+
+        }catch (Exception ex)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean setRecurentEvents(HttpServletRequest request, RecurentEventDTO event)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        Recurent_Event e = new Recurent_Event();
+        e.setDescription(event.getEvent_description());
+        e.setEnd_date(event.getEnd_date());
+        e.setEnd_time(event.getEnd_hour());
+        e.setStart_date(event.getStart_date());
+        e.setStart_time(event.getStart_hour());
+        e.setLocation(event.getLocation());
+        e.setName(event.getName());
+        e.setFrequency(event.getFrequency());
+        e.setRecurring_days(event.getRecurring_days().toLowerCase());
+
+        try {
+            String hql = "select MAX(id) from Recurent_Event";
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            e.setId(((Long) query.list().get(0)) + 1);
+
+            sessionFactory.getCurrentSession().save(e);
+
+            Participation p = new Participation();
+            p.setRecurent_event(e.getId());
+            p.setOwn_end_time(event.getEnd_hour());
+            p.setOwn_start_time(event.getStart_hour());
+            p.setPreffered(true);
+
+            hql = "from User where username = '" + jwtUser.getUserName() + "'";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setUser(((User) query.list().get(0)).getId());
+
+            hql = "select MAX(participation_id) from Participation";
+            query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            p.setParticipation_id((Long) query.list().get(0) + 1);
+
+            sessionFactory.getCurrentSession().save(p);
+
+
+        }catch (Exception ex)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

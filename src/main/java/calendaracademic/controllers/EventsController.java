@@ -5,7 +5,7 @@ import calendaracademic.POJO.PrivateEventsPOJO;
 import calendaracademic.POJO.PrivateRecurentEventsPOJO;
 import calendaracademic.POJO.RecurentEventsPOJO;
 import calendaracademic.dao.EventsDAO;
-import calendaracademic.dto.InvitationDTO;
+import calendaracademic.dto.*;
 import calendaracademic.response.Invitations;
 import calendaracademic.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +68,49 @@ public class EventsController {
         maping.put("RecurentEvents",  joRE);
 
         return ResponseEntity.ok(maping);
+    }
+
+    @PutMapping(value = "/service/createNormalEvent")
+    public ResponseEntity<?> setNormalEvent (HttpServletRequest request, @RequestBody NormalEventDTO event)
+    {
+        if(EventsDAO.setNormalEvents(request, event)) {
+            return ResponseEntity.ok("OK");
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/service/createPrivateEvent")
+    public ResponseEntity<?> setPrivateEvent (HttpServletRequest request, @RequestBody PrivateEventDTO event)
+    {
+        if(EventsDAO.setPrivateEvents(request, event)) {
+            return ResponseEntity.ok("OK");
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/service/createPrivateRecurentEvent")
+    public ResponseEntity<?> setPrivateRecurentEvent (HttpServletRequest request, @RequestBody PrivateRecurentEventDTO event)
+    {
+        if(EventsDAO.setPrivateRecurentEvents(request, event)) {
+            return ResponseEntity.ok("OK");
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/service/createRecurentEvent")
+    public ResponseEntity<?> setRecurentEvent (HttpServletRequest request, @RequestBody RecurentEventDTO event)
+    {
+        if(EventsDAO.setRecurentEvents(request, event)) {
+            return ResponseEntity.ok("OK");
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class InvitationDTO {
 
     private boolean response;
 
+
     public InvitationDTO(){}
 
     public long getId() {
