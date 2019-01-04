@@ -74,7 +74,7 @@ public class LoginController {
 
         }catch (Exception e)
         {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new IsTokenAvailable(false), null, HttpStatus.BAD_REQUEST);
         }
     }
 }
