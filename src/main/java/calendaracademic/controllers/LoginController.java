@@ -3,6 +3,7 @@ package calendaracademic.controllers;
 import calendaracademic.dto.AuthDTO;
 import calendaracademic.dto.ChangeDTO;
 import calendaracademic.response.Details;
+import calendaracademic.response.IsTokenAvailable;
 import calendaracademic.response.Login;
 import calendaracademic.services.JwtFilter;
 import calendaracademic.services.JwtService;
@@ -60,5 +61,20 @@ public class LoginController {
         }
         else
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(value = "/token_info")
+    public ResponseEntity<?> getTokenStatus (HttpServletRequest request)
+    {
+        try {
+
+            IsTokenAvailable status = new IsTokenAvailable(loginDAO.isLogged(request));
+
+            return ResponseEntity.ok(status);
+
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }

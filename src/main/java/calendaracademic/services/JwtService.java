@@ -59,6 +59,22 @@ public class JwtService {
         return securityUser;
     }
 
+    protected boolean isAvailable(String encodedSecret, String token)
+    {
+        Claims claims = Jwts.parser()
+                .setSigningKey(encodedSecret)
+                .parseClaimsJws(token)
+                .getBody();
+        Date expiration = claims.getExpiration();
+        Date now = new Date();
+        if(now.before(expiration))
+            return true;
+        else
+            return false;
+    }
+
+    public boolean isTokenAvailable(String token) { return  isAvailable(this.encodedSecret, token); }
+
     public Login getUser(String token)
     {
         return getUser(this.encodedSecret, token);

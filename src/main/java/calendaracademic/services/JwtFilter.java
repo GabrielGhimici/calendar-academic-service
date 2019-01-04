@@ -1,7 +1,6 @@
 package calendaracademic.services;
 
 import calendaracademic.response.Login;
-import calendaracademic.services.JwtService;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

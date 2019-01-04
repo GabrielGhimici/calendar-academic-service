@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<timetable ascttversion="2019.6.3" importtype="database" options="groupstype1,decimalseparatordot" defaultexport="1" displayname="aSc Timetables 2008 XML" displaycountries="">
+   <days options="canadd,export:silent" columns="day,name,short">
+      <day name="Monday" short="Mo" day="0"/>
+      <day name="Tuesday" short="Tu" day="1"/>
+      <day name="Wednesday" short="We" day="2"/>
+      <day name="Thursday" short="Th" day="3"/>
+      <day name="Friday" short="Fr" day="4"/>
+   </days>
+   <periods options="canadd,export:silent" columns="period,starttime,endtime">
+      <period period="1" starttime="8:00" endtime="8:50"/>
+      <period period="2" starttime="9:00" endtime="9:50"/>
+      <period period="3" starttime="10:00" endtime="10:50"/>
+      <period period="4" starttime="11:00" endtime="11:50"/>
+      <period period="5" starttime="12:00" endtime="12:50"/>
+      <period period="6" starttime="13:00" endtime="13:50"/>
+      <period period="7" starttime="14:00" endtime="14:50"/>
+      <period period="8" starttime="15:00" endtime="15:50"/>
+      <period period="9" starttime="16:00" endtime="16:50"/>
+      <period period="10" starttime="17:00" endtime="17:50"/>
+      <period period="11" starttime="18:00" endtime="18:50"/>
+      <period period="12" starttime="19:00" endtime="19:50"/>
+   </periods>
+   <dayperiods options="canadd,export:silent" columns="day,period,starttime,endtime"/>
+   <teachers options="canadd,export:silent" columns="id,name,short,gender,color">
+      <teacher id="*1" name="Prof 1" short="1P" gender="F" color="#FF0000"/>
+      <teacher id="*2" name="Prof 2" short="2P" gender="F" color="#00FF00"/>
+      <teacher id="*3" name="Prof 3" short="3P" gender="F" color="#0000FF"/>
+      <teacher id="*4" name="Prof 4" short="4P" gender="F" color="#FFCCFF"/>
+      <teacher id="*5" name="Prof 5" short="5P" gender="F" color="#FFFF66"/>
+      <teacher id="*6" name="Prof 6" short="6P" gender="F" color="#FF6666"/>
+      <teacher id="*7" name="Prof 7" short="7P" gender="F" color="#FFCC66"/>
+      <teacher id="*8" name="Prof 8" short="8P" gender="F" color="#000080"/>
+      <teacher id="*9" name="Prof 9" short="9P" gender="F" color="#66FFFF"/>
+      <teacher id="*10" name="Prof 10" short="10P" gender="F" color="#009933"/>
+   </teachers>
+   <classes options="canadd,export:silent" columns="id,name,short,classroomids,teacherid,grade">
+      <class id="*1" name="Grupa1" short="G1" teacherid="" classroomids="" grade=""/>
+      <class id="*2" name="Grupa2" short="G2" teacherid="" classroomids="" grade=""/>
+      <class id="*3" name="Grupa3" short="G3" teacherid="" classroomids="" grade=""/>
+      <class id="*4" name="Grupa4" short="G4" teacherid="" classroomids="" grade=""/>
+      <class id="*5" name="Grupa5" short="G5" teacherid="" classroomids="" grade=""/>
+      <class id="*6" name="Grupa6" short="G6" teacherid="" classroomids="" grade=""/>
+      <class id="*7" name="Grupa7" short="G7" teacherid="" classroomids="" grade=""/>
+      <class id="*8" name="Grupa8" short="G8" teacherid="" classroomids="" grade=""/>
+      <class id="*9" name="Grupa9" short="G9" teacherid="" classroomids="" grade=""/>
+      <class id="*10" name="Grupa10" short="G10" teacherid="" classroomids="" grade=""/>
+   </classes>
+   <subjects options="canadd,export:silent" columns="id,name,short">
+      <subject id="*1" name="Cus1" short="C1"/>
+      <subject id="*2" name="Curs2" short="C2"/>
+      <subject id="*3" name="Curs3" short="C3"/>
+      <subject id="*4" name="Curs4" short="C4"/>
+      <subject id="*5" name="Curs5" short="C5"/>
+      <subject id="*6" name="Curs6" short="C6"/>
+      <subject id="*7" name="Curs7" short="C7"/>
+      <subject id="*8" name="Curs8" short="C8"/>
+      <subject id="*9" name="Curs9" short="C9"/>
+      <subject id="*10" name="Curs10" short="C10"/>
+   </subjects>
+   <classrooms options="canadd,export:silent" columns="id,name,short">
+      <classroom id="*1" name="Sala100" short="S100"/>
+      <classroom id="*2" name="Sala101" short="S101"/>
+      <classroom id="*3" name="Sala102" short="S102"/>
+      <classroom id="*4" name="Sala103" short="S103"/>
+      <classroom id="*5" name="Sala104" short="S104"/>
+      <classroom id="*6" name="Sala105" short="S105"/>
+      <classroom id="*7" name="Sala106" short="S106"/>
+      <classroom id="*8" name="Sala107" short="S107"/>
+      <classroom id="*9" name="Sala108" short="S108"/>
+      <classroom id="*10" name="Sala109" short="S109"/>
+   </classrooms>
+   <students options="canadd,export:silent" columns="id,classid,name"/>
+   <groups options="canadd,export:silent" columns="id,classid,name,entireclass,divisiontag,studentcount">
+      <group id="*1" name="Entire class" classid="*1" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*2" name="Group 1" classid="*1" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*3" name="Group 2" classid="*1" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*4" name="Boys" classid="*1" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*5" name="Girls" classid="*1" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*6" name="Entire class" classid="*2" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*7" name="Group 1" classid="*2" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*8" name="Group 2" classid="*2" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*9" name="Boys" classid="*2" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*10" name="Girls" classid="*2" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*11" name="Entire class" classid="*3" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*12" name="Group 1" classid="*3" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*13" name="Group 2" classid="*3" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*14" name="Boys" classid="*3" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*15" name="Girls" classid="*3" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*16" name="Entire class" classid="*4" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*17" name="Group 1" classid="*4" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*18" name="Group 2" classid="*4" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*19" name="Boys" classid="*4" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*20" name="Girls" classid="*4" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*21" name="Entire class" classid="*5" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*22" name="Group 1" classid="*5" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*23" name="Group 2" classid="*5" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*24" name="Boys" classid="*5" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*25" name="Girls" classid="*5" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*26" name="Entire class" classid="*6" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*27" name="Group 1" classid="*6" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*28" name="Group 2" classid="*6" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*29" name="Boys" classid="*6" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*30" name="Girls" classid="*6" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*31" name="Entire class" classid="*7" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*32" name="Group 1" classid="*7" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*33" name="Group 2" classid="*7" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*34" name="Boys" classid="*7" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*35" name="Girls" classid="*7" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*36" name="Entire class" classid="*8" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*37" name="Group 1" classid="*8" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*38" name="Group 2" classid="*8" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*39" name="Boys" classid="*8" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*40" name="Girls" classid="*8" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*41" name="Entire class" classid="*9" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*42" name="Group 1" classid="*9" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*43" name="Group 2" classid="*9" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*44" name="Boys" classid="*9" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*45" name="Girls" classid="*9" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*46" name="Entire class" classid="*10" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="*47" name="Group 1" classid="*10" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*48" name="Group 2" classid="*10" entireclass="0" divisiontag="1" studentcount=""/>
+      <group id="*49" name="Boys" classid="*10" entireclass="0" divisiontag="2" studentcount=""/>
+      <group id="*50" name="Girls" classid="*10" entireclass="0" divisiontag="2" studentcount=""/>
+   </groups>
+   <lessons options="canadd,export:silent" columns="id,subjectid,classids,groupids,studentids,teacherids,classroomids,periodspercard,periodsperweek,weeks">
+      <lesson id="*1" classids="*1" subjectid="*1" periodspercard="2" periodsperweek="1.0" teacherids="*1" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*2" studentids="" weeks="10"/>
+      <lesson id="*2" classids="*1" subjectid="*1" periodspercard="2" periodsperweek="1.0" teacherids="*1" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*3" studentids="" weeks="01"/>
+      <lesson id="*3" classids="*10" subjectid="*2" periodspercard="3" periodsperweek="3.0" teacherids="*1" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*46" studentids="" weeks="11"/>
+      <lesson id="*4" classids="*5" subjectid="*10" periodspercard="3" periodsperweek="3.0" teacherids="*2" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*22" studentids="" weeks="01"/>
+      <lesson id="*5" classids="*5" subjectid="*10" periodspercard="3" periodsperweek="1.5" teacherids="*2" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*23" studentids="" weeks="10"/>
+      <lesson id="*6" classids="*9" subjectid="*8" periodspercard="2" periodsperweek="2.0" teacherids="*2" classroomids="*1,*2,*3,*4,*5,*6,*7,*8,*9,*10" groupids="*41" studentids="" weeks="11"/>
+   </lessons>
+   <cards options="canadd,export:silent" columns="lessonid,day,period,classroomids">
+      <card lessonid="*1" classroomids="*8" day="0" period="1"/>
+      <card lessonid="*1" classroomids="*8" day="0" period="2"/>
+      <card lessonid="*2" classroomids="*7" day="2" period="2"/>
+      <card lessonid="*2" classroomids="*7" day="2" period="3"/>
+      <card lessonid="*3" classroomids="*9" day="0" period="7"/>
+      <card lessonid="*3" classroomids="*9" day="0" period="8"/>
+      <card lessonid="*3" classroomids="*9" day="0" period="9"/>
+      <card lessonid="*4" classroomids="*7" day="1" period="9"/>
+      <card lessonid="*4" classroomids="*7" day="1" period="10"/>
+      <card lessonid="*4" classroomids="*7" day="1" period="11"/>
+   </cards>
+   <grades options="canadd,export:silent" columns="id,name,short,grade">
+      <grade id="*1" name="Grade 1" short="G 1" grade="1"/>
+      <grade id="*2" name="Grade 2" short="G 2" grade="2"/>
+      <grade id="*3" name="Grade 3" short="G 3" grade="3"/>
+      <grade id="*4" name="Grade 4" short="G 4" grade="4"/>
+      <grade id="*5" name="Grade 5" short="G 5" grade="5"/>
+      <grade id="*6" name="Grade 6" short="G 6" grade="6"/>
+      <grade id="*7" name="Grade 7" short="G 7" grade="7"/>
+      <grade id="*8" name="Grade 8" short="G 8" grade="8"/>
+      <grade id="*9" name="Grade 9" short="G 9" grade="9"/>
+      <grade id="*10" name="Grade 10" short="G 10" grade="10"/>
+      <grade id="*11" name="Grade 11" short="G 11" grade="11"/>
+      <grade id="*12" name="Grade 12" short="G 12" grade="12"/>
+      <grade id="*13" name="Grade 13" short="G 13" grade="13"/>
+      <grade id="*14" name="Grade 14" short="G 14" grade="14"/>
+      <grade id="*15" name="Grade 15" short="G 15" grade="15"/>
+      <grade id="*16" name="Grade 16" short="G 16" grade="16"/>
+      <grade id="*17" name="Grade 17" short="G 17" grade="17"/>
+      <grade id="*18" name="Grade 18" short="G 18" grade="18"/>
+      <grade id="*19" name="Grade 19" short="G 19" grade="19"/>
+      <grade id="*20" name="Grade 20" short="G 20" grade="20"/>
+   </grades>
+</timetable>

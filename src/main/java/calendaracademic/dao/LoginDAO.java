@@ -12,4 +12,6 @@ public interface LoginDAO {
     String logout(HttpServletRequest request);
 
     Details getDetails (HttpServletRequest request);
+
+    boolean isLogged(HttpServletRequest request);
 }

@@ -148,4 +148,15 @@ public class LoginDAOI implements LoginDAO {
         return details;
     }
 
+    public boolean isLogged(HttpServletRequest request)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+
+        if(jwtTokenService.isTokenAvailable(authHeaderVal))
+            return true;
+        else
+            return false;
+    }
+
 }

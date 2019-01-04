@@ -13,7 +13,7 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        Watchdog watcher = new Watchdog("Maintenance thread");
+        Watchdog watcher = new Watchdog("Watchdog");
         watcher.run();
     }
 }
