@@ -85,5 +85,10 @@ public class JwtFilter implements Filter {
             }
         }
     }
+    
+    public static boolean isTokenInvalidated(String token)
+    {
+        return tokens.contains(token);
+    }
 
 }
