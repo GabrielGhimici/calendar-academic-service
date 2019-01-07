@@ -61,12 +61,18 @@ public class JwtService {
 
     protected boolean isAvailable(String encodedSecret, String token)
     {
+        if(JwtFilter.isTokenInvalidated(token))
+            return false;
+        else
+            return true;
+            
         Claims claims = Jwts.parser()
                 .setSigningKey(encodedSecret)
                 .parseClaimsJws(token)
                 .getBody();
         Date expiration = claims.getExpiration();
         Date now = new Date();
+        
         if(now.before(expiration))
             return true;
         else
