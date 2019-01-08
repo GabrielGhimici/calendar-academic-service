@@ -63,8 +63,6 @@ public class JwtService {
     {
         if(JwtFilter.isTokenInvalidated(token))
             return false;
-        else
-            return true;
             
         Claims claims = Jwts.parser()
                 .setSigningKey(encodedSecret)
