@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class EventsPOJO {
 
+    private Long id;
     private String name;
     private String event_description;
     private String location;
@@ -16,9 +17,12 @@ public class EventsPOJO {
     private String recurring_days;
     private String owner;
 
-    public EventsPOJO(String name, String event_description, String location, Date start_date, Date end_date,
+    public EventsPOJO() {}
+
+    public EventsPOJO(Long id, String name, String event_description, String location, Date start_date, Date end_date,
                       String start_hour, String end_hour, int frequency, boolean isRecurrent, String recurring_days,
                       String owner) {
+        this.id = id;
         this.name = name;
         this.event_description = event_description;
         this.location = location;
@@ -32,7 +36,21 @@ public class EventsPOJO {
         this.owner = owner;
     }
 
-    public EventsPOJO(){}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEvent_description() {
         return event_description;
@@ -94,8 +112,8 @@ public class EventsPOJO {
         return isRecurrent;
     }
 
-    public void setRecurrent(boolean reccurent) {
-        isRecurrent = reccurent;
+    public void setRecurrent(boolean recurrent) {
+        isRecurrent = recurrent;
     }
 
     public String getRecurring_days() {
@@ -112,13 +130,5 @@ public class EventsPOJO {
 
     public void setOwner(String owner) {
         this.owner = owner;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

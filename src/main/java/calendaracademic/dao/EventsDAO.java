@@ -1,13 +1,11 @@
 package calendaracademic.dao;
 
-import calendaracademic.POJO.NormalEventsPOJO;
-import calendaracademic.POJO.PrivateEventsPOJO;
-import calendaracademic.POJO.PrivateRecurentEventsPOJO;
-import calendaracademic.POJO.RecurentEventsPOJO;
+import calendaracademic.POJO.*;
 import calendaracademic.dto.*;
 import calendaracademic.response.Invitations;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 public interface EventsDAO {
 
@@ -30,4 +28,6 @@ public interface EventsDAO {
     boolean setPrivateRecurentEvents(HttpServletRequest request, PrivateRecurentEventDTO event);
 
     boolean setRecurentEvents(HttpServletRequest request, RecurentEventDTO event);
+
+    EventsPOJO[] getEventsSerialized(HttpServletRequest request, Date before, Date after);
 }

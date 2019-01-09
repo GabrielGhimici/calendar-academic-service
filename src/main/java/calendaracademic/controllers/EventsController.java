@@ -1,9 +1,6 @@
 package calendaracademic.controllers;
 
-import calendaracademic.POJO.NormalEventsPOJO;
-import calendaracademic.POJO.PrivateEventsPOJO;
-import calendaracademic.POJO.PrivateRecurentEventsPOJO;
-import calendaracademic.POJO.RecurentEventsPOJO;
+import calendaracademic.POJO.*;
 import calendaracademic.dao.EventsDAO;
 import calendaracademic.dto.*;
 import calendaracademic.response.Invitations;
@@ -66,6 +63,18 @@ public class EventsController {
         maping.put("PrivateEvents",  joPE);
         maping.put("PrivateRecurentEvents",  joPRE);
         maping.put("RecurentEvents",  joRE);
+
+        return ResponseEntity.ok(maping);
+    }
+
+
+    @GetMapping(value = "/service/serializedEvents")
+    public ResponseEntity<?> showEventsSerialized (HttpServletRequest request, DateDTO interval)
+    {
+        EventsPOJO[] jo = EventsDAO.getEventsSerialized(request,interval.getBeforeDate(),interval.getAfterDate());
+
+        Map maping = new HashMap<String,String>();
+        maping.put("events",  jo);
 
         return ResponseEntity.ok(maping);
     }

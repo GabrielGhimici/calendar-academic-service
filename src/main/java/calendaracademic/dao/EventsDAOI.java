@@ -6,6 +6,7 @@ import calendaracademic.model.*;
 import calendaracademic.response.Invitations;
 import calendaracademic.response.Login;
 import calendaracademic.services.JwtService;
+import calendaracademic.utils.EventUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -110,6 +112,8 @@ public class EventsDAOI implements EventsDAO{
 
                                         if (listN != null && !listN.isEmpty()) {
 
+                                            event.setId(EventUtils.generateExternalEventId(listN.get(0).getId(),
+                                                    EventUtils.NORMAL_EVENT));
                                             event.setEnd_date(listN.get(0).getEnd_date());
                                             event.setEnd_hour(listN.get(0).getEnd_time());
                                             event.setStart_date(listN.get(0).getStart_date());
@@ -126,6 +130,8 @@ public class EventsDAOI implements EventsDAO{
                                         List<Private_Event> listP = (List<Private_Event>) query.list();
 
                                         if (listP != null && !listP.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listP.get(0).getId(),
+                                                    EventUtils.PRIVATE_EVENT));
                                             event.setEnd_date(listP.get(0).getEnd_date());
                                             event.setEnd_hour(listP.get(0).getEnd_time());
                                             event.setStart_date(listP.get(0).getStart_date());
@@ -161,6 +167,8 @@ public class EventsDAOI implements EventsDAO{
                                         List<Recurent_Event> listRN = (List<Recurent_Event>) query.list();
 
                                         if (listRN != null && !listRN.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listRN.get(0).getId(),
+                                                    EventUtils.RECURRENT_EVENT));
                                             event.setEnd_date(listRN.get(0).getEnd_date());
                                             event.setEnd_hour(listRN.get(0).getEnd_time());
                                             event.setStart_date(listRN.get(0).getStart_date());
@@ -179,6 +187,8 @@ public class EventsDAOI implements EventsDAO{
                                         List<Private_Recurent_Event> listPR = (List<Private_Recurent_Event>) query.list();
 
                                         if (listPR != null && !listPR.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listPR.get(0).getId(),
+                                                    EventUtils.PRIVATE_RECURRENT_EVENT));
                                             event.setEnd_date(listPR.get(0).getEnd_date());
                                             event.setEnd_hour(listPR.get(0).getEnd_time());
                                             event.setStart_date(listPR.get(0).getStart_date());
@@ -850,5 +860,217 @@ public class EventsDAOI implements EventsDAO{
         return true;
     }
 
+
+    //get events serialized
+    public EventsPOJO[] getEventsSerialized(HttpServletRequest request, Date before, Date after)
+    {
+        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+        final String authHeaderVal = httpRequest.getHeader(authHeader);
+        Login jwtUser = jwtTokenService.getUser(authHeaderVal);
+
+        String hql = "from User where username = '" + jwtUser.getUserName() + "'";
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+            @SuppressWarnings("unchecked")
+            List<User> list = (List<User>) query.list();
+
+            if (list != null && !list.isEmpty()) {
+
+                hql = "from Participation where user = '" + list.get(0).getId() + "'";
+                try {
+                    query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                    @SuppressWarnings("unchecked")
+                    List<Invitation>list2 = (List<Invitation>) query.list();
+
+                    if (list2 != null && !list2.isEmpty()) {
+
+                        EventsPOJO[] vect = new EventsPOJO[list2.size()];
+
+                        for(int cnt = 0; cnt < list2.size(); cnt++)
+                        {
+                            EventsPOJO event = new EventsPOJO();
+
+                            short event_type = 0;
+                            if(list2.get(cnt).getNormal_event() != null)
+                                event_type = 1;
+                            else
+                            {
+                                if(list2.get(cnt).getPrivate_event() != null)
+                                    event_type = 2;
+                                else
+                                {
+                                    if(list2.get(cnt).getRecurent_event() != null)
+                                        event_type = 3;
+                                    else
+                                        event_type = 4;
+                                }
+                            }
+
+                            switch (event_type)
+                            {
+                                case 1:
+                                    hql = "from Normal_Event where event_id = '" + list2.get(cnt).getNormal_event() + "'";
+                                    break;
+                                case 2:
+                                    hql = "from Private_Event where event_id = '" + list2.get(cnt).getPrivate_event() + "'";
+                                    break;
+                                case 3:
+                                    hql = "from Recurent_Event where event_id = '" + list2.get(cnt).getRecurent_event() + "'";
+                                    break;
+                                case 4:
+                                    hql = "from Private_Recurent_Event where event_id = '" + list2.get(cnt).getPrivate_recurent_event() + "'";
+                                    break;
+                                default:
+                                    return null;
+                            }
+
+                            hql += " and (start_date between '" + before + "' and '" + after + "')";
+
+                            try {
+                                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                                switch (event_type)
+                                {
+                                    case 1:
+                                        @SuppressWarnings("unchecked")
+                                        List<Normal_Event> listN = (List<Normal_Event>) query.list();
+
+                                        if (listN != null && !listN.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listN.get(0).getId(),
+                                                    EventUtils.NORMAL_EVENT));
+                                            event.setEnd_date(listN.get(0).getEnd_date());
+                                            event.setEnd_hour(listN.get(0).getEnd_time());
+                                            event.setStart_date(listN.get(0).getStart_date());
+                                            event.setStart_hour(listN.get(0).getStart_time());
+                                            event.setEvent_description(listN.get(0).getDescription());
+                                            event.setLocation(listN.get(0).getLocation());
+                                            event.setName(listN.get(0).getName());
+                                            event.setRecurrent(false);
+                                        }
+
+                                        break;
+                                    case 2:
+                                        @SuppressWarnings("unchecked")
+                                        List<Private_Event> listP = (List<Private_Event>) query.list();
+
+                                        if (listP != null && !listP.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listP.get(0).getId(),
+                                                    EventUtils.PRIVATE_EVENT));
+                                            event.setEnd_date(listP.get(0).getEnd_date());
+                                            event.setEnd_hour(listP.get(0).getEnd_time());
+                                            event.setStart_date(listP.get(0).getStart_date());
+                                            event.setStart_hour(listP.get(0).getStart_time());
+                                            event.setEvent_description(listP.get(0).getDescription());
+                                            event.setLocation(listP.get(0).getLocation());
+                                            event.setName(listP.get(0).getName());
+                                            event.setRecurrent(false);
+
+                                            hql = "from User where user_id = '" + listP.get(0).getOwner() + "'";
+
+                                            try {
+
+                                                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                                                @SuppressWarnings("unchecked")
+                                                List<User> list4 = (List<User>) query.list();
+
+                                                if (list4 != null && !list4.isEmpty()) {
+                                                    String aux = list4.get(0).getUsername().replace(".", " ");
+                                                    aux = aux.substring(0, aux.lastIndexOf("@"));
+                                                    event.setOwner(aux);
+                                                }
+
+                                            } catch (Exception e) {
+                                                return null;
+                                            }
+                                        }
+
+                                        break;
+                                    case 3:
+                                        @SuppressWarnings("unchecked")
+                                        List<Recurent_Event> listRN = (List<Recurent_Event>) query.list();
+
+                                        if (listRN != null && !listRN.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listRN.get(0).getId(),
+                                                    EventUtils.RECURRENT_EVENT));
+                                            event.setEnd_date(listRN.get(0).getEnd_date());
+                                            event.setEnd_hour(listRN.get(0).getEnd_time());
+                                            event.setStart_date(listRN.get(0).getStart_date());
+                                            event.setStart_hour(listRN.get(0).getStart_time());
+                                            event.setEvent_description(listRN.get(0).getDescription());
+                                            event.setLocation(listRN.get(0).getLocation());
+                                            event.setName(listRN.get(0).getName());
+                                            event.setRecurrent(true);
+                                            event.setFrequency(listRN.get(0).getFrequency());
+                                            event.setRecurring_days(listRN.get(0).getRecurring_days());
+                                        }
+
+                                        break;
+                                    case 4:
+                                        @SuppressWarnings("unchecked")
+                                        List<Private_Recurent_Event> listPR = (List<Private_Recurent_Event>) query.list();
+
+                                        if (listPR != null && !listPR.isEmpty()) {
+                                            event.setId(EventUtils.generateExternalEventId(listPR.get(0).getId(),
+                                                    EventUtils.PRIVATE_RECURRENT_EVENT));
+                                            event.setEnd_date(listPR.get(0).getEnd_date());
+                                            event.setEnd_hour(listPR.get(0).getEnd_time());
+                                            event.setStart_date(listPR.get(0).getStart_date());
+                                            event.setStart_hour(listPR.get(0).getStart_time());
+                                            event.setEvent_description(listPR.get(0).getDescription());
+                                            event.setLocation(listPR.get(0).getLocation());
+                                            event.setName(listPR.get(0).getName());
+                                            event.setRecurrent(true);
+                                            event.setFrequency(listPR.get(0).getFrequency());
+                                            event.setRecurring_days(listPR.get(0).getRecurring_days());
+
+                                            hql = "from User where user_id = '" + listPR.get(0).getOwner() + "'";
+
+                                            try {
+
+                                                query = sessionFactory.getCurrentSession().createQuery(hql);
+
+                                                @SuppressWarnings("unchecked")
+                                                List<User> list4 = (List<User>) query.list();
+
+                                                if (list4 != null && !list4.isEmpty()) {
+                                                    String aux = list4.get(0).getUsername().replace(".", " ");
+                                                    aux = aux.substring(0, aux.lastIndexOf("@"));
+                                                    event.setOwner(aux);
+                                                }
+
+                                            } catch (Exception e) {
+                                                return null;
+                                            }
+                                        }
+
+                                        break;
+                                    default:
+                                        return null;
+                                }
+                            }catch (Exception e)
+                            {
+                                return null;
+                            }
+
+                            vect[cnt] = event;
+                        }
+
+                        return vect;
+                    }
+                }catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }catch (Exception e)
+        {
+            return null;
+        }
+
+        return null;
+    }
 
 }
