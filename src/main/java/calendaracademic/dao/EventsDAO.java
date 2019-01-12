@@ -30,4 +30,10 @@ public interface EventsDAO {
     boolean setRecurentEvents(HttpServletRequest request, RecurentEventDTO event);
 
     EventsPOJO[] getEventsSerialized(HttpServletRequest request, Date before, Date after);
+
+    EventsPOJO getEvent(HttpServletRequest request, Long id);
+
+    /*boolean updateNormalEvent(NormalEventDTO event, Long id);
+
+    boolean deleteEvent(HttpServletRequest request, Long id);*/
 }

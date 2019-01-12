@@ -76,6 +76,28 @@ public class EventsController {
         return ResponseEntity.ok(maping);
     }
 
+    @PostMapping(value = "/service/certainEvent")
+    public ResponseEntity<?> showEvent (HttpServletRequest request, @RequestBody EventDTO event)
+    {
+        EventsPOJO jo = EventsDAO.getEvent(request, event.getId());
+
+        Map maping = new HashMap<String,String>();
+        maping.put("event",  jo);
+
+        return ResponseEntity.ok(maping);
+    }
+
+    /*@PutMapping(value = "/service/certainEvent")
+    public ResponseEntity<?> updateEvent (HttpServletRequest request, @RequestBody EventsPOJO event)
+    {
+        if(EventsDAO.updateEvent(request, event)) {
+            return ResponseEntity.ok("OK");
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }*/
+
     @PutMapping(value = "/service/createNormalEvent")
     public ResponseEntity<?> setNormalEvent (HttpServletRequest request, @RequestBody NormalEventDTO event)
     {
@@ -112,6 +134,7 @@ public class EventsController {
     @PutMapping(value = "/service/createRecurentEvent")
     public ResponseEntity<?> setRecurentEvent (HttpServletRequest request, @RequestBody RecurentEventDTO event)
     {
+
         if(EventsDAO.setRecurentEvents(request, event)) {
             return ResponseEntity.ok("OK");
         }
@@ -119,4 +142,6 @@ public class EventsController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
+
 }
