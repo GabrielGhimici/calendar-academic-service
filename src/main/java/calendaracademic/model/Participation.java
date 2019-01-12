@@ -42,7 +42,7 @@ public class Participation {
         this.participation_id = participation_id;
     }
 
-    public long getRecurent_event() {
+    public Long getRecurent_event() {
         return recurent_event;
     }
 
@@ -50,7 +50,7 @@ public class Participation {
         this.recurent_event = recurent_event;
     }
 
-    public long getPrivate_event() {
+    public Long getPrivate_event() {
         return private_event;
     }
 
@@ -58,7 +58,7 @@ public class Participation {
         this.private_event = private_event;
     }
 
-    public long getNormal_event() {
+    public Long getNormal_event() {
         return normal_event;
     }
 
@@ -66,7 +66,7 @@ public class Participation {
         this.normal_event = normal_event;
     }
 
-    public long getPrivate_recurent_event() {
+    public Long getPrivate_recurent_event() {
         return private_recurent_event;
     }
 
