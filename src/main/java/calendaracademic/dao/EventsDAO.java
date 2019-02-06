@@ -31,6 +31,8 @@ public interface EventsDAO {
 
     EventsPOJO[] getEventsSerialized(HttpServletRequest request, Date before, Date after);
 
+    EventsPOJO[] getPrefferedEventsSerialized(HttpServletRequest request, Date before, Date after);
+
     EventsPOJO getEvent(HttpServletRequest request, Long id);
 
     /*boolean updateNormalEvent(NormalEventDTO event, Long id);

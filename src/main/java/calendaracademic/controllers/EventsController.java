@@ -76,6 +76,17 @@ public class EventsController {
         return ResponseEntity.ok(maping);
     }
 
+    @PostMapping(value = "/service/serializedPrefferedEvents")
+    public ResponseEntity<?> showPrefferedEventsSerialized (HttpServletRequest request, @RequestBody DateDTO interval)
+    {
+        EventsPOJO[] jo = EventsDAO.getPrefferedEventsSerialized(request,interval.getBeforeDate(),interval.getAfterDate());
+
+        Map maping = new HashMap<String,String>();
+        maping.put("events",  jo);
+
+        return ResponseEntity.ok(maping);
+    }
+
     @PostMapping(value = "/service/certainEvent")
     public ResponseEntity<?> showEvent (HttpServletRequest request, @RequestBody EventDTO event)
     {
