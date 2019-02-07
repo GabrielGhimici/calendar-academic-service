@@ -883,8 +883,8 @@ public class EventsDAOI implements EventsDAO{
             if (list != null && !list.isEmpty()) {
 
                 hql = "select e from Participation p, Normal_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        " and p.normal_event=e.id and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        " and p.normal_event=e.id and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -911,8 +911,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Private_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.private_event=e.id and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.private_event=e.id and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -959,8 +959,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.recurent_event=e.id and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.recurent_event=e.id and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
                     @SuppressWarnings("unchecked")
@@ -990,8 +990,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Private_Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.private_recurent_event=e.id and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.private_recurent_event=e.id and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1232,8 +1232,8 @@ public class EventsDAOI implements EventsDAO{
             if (list != null && !list.isEmpty()) {
 
                 hql = "select e from Participation p, Normal_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        " and p.normal_event=e.id and p.preffered = 'true' and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        " and p.normal_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1253,7 +1253,7 @@ public class EventsDAOI implements EventsDAO{
                             event.setName(listN.get(cnt).getName());
                             event.setRecurrent(false);
 
-                            hql = "from Participation where p.user = '" + list.get(0).getId() + "'" +
+                            hql = "from Participation p where p.user = '" + list.get(0).getId() + "'" +
                                     " and p.normal_event='" + listN.get(cnt).getId() + "'";
                             try {
                                 query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -1277,8 +1277,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Private_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.private_event=e.id and p.preffered = 'true' and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.private_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1318,7 +1318,7 @@ public class EventsDAOI implements EventsDAO{
                                 return null;
                             }
 
-                            hql = "from Participation where p.user = '" + list.get(0).getId() + "'" +
+                            hql = "from Participation p where p.user = '" + list.get(0).getId() + "'" +
                                     " and p.private_event='" + listP.get(cnt).getId() + "'";
                             try {
                                 query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -1342,8 +1342,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.recurent_event=e.id and p.preffered = 'true' and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.recurent_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
                     @SuppressWarnings("unchecked")
@@ -1365,7 +1365,7 @@ public class EventsDAOI implements EventsDAO{
                             event.setFrequency(listRN.get(cnt).getFrequency());
                             event.setRecurring_days(listRN.get(cnt).getRecurring_days());
 
-                            hql = "from Participation where p.user = '" + list.get(0).getId() + "'" +
+                            hql = "from Participation p where p.user = '" + list.get(0).getId() + "'" +
                                     " and p.recurent_event='" + listRN.get(cnt).getId() + "'";
                             try {
                                 query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -1389,8 +1389,8 @@ public class EventsDAOI implements EventsDAO{
                 }
 
                 hql = "select e from Participation p, Private_Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
-                        "and p.private_recurent_event=e.id and p.preffered = 'true' and (('" + after + "' between e.start_date and e.end_date)" +
-                        "or ('" + before + "' between e.start_date and e.end_date))";
+                        "and p.private_recurent_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1432,7 +1432,7 @@ public class EventsDAOI implements EventsDAO{
                                 return null;
                             }
 
-                            hql = "from Participation where p.user = '" + list.get(0).getId() + "'" +
+                            hql = "from Participation p where p.user = '" + list.get(0).getId() + "'" +
                                     " and p.private_recurent_event='" + listPR.get(cnt).getId() + "'";
                             try {
                                 query = sessionFactory.getCurrentSession().createQuery(hql);
