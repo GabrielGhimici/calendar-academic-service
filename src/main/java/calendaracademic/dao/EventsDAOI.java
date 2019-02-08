@@ -328,7 +328,7 @@ public class EventsDAOI implements EventsDAO{
                             if (listP != null && !listP.isEmpty()) {
 
                                 Participation p = new Participation();
-                                p.setNormal_event(listP.get(0).getId());
+                                p.setPrivate_event(listP.get(0).getId());
                                 p.setOwn_end_time(listP.get(0).getEnd_time());
                                 p.setOwn_start_time(listP.get(0).getStart_time());
                                 p.setPreffered(true);
@@ -351,7 +351,7 @@ public class EventsDAOI implements EventsDAO{
                             if (listRN != null && !listRN.isEmpty()) {
 
                                 Participation p = new Participation();
-                                p.setNormal_event(listRN.get(0).getId());
+                                p.setRecurent_event(listRN.get(0).getId());
                                 p.setOwn_end_time(listRN.get(0).getEnd_time());
                                 p.setOwn_start_time(listRN.get(0).getStart_time());
                                 p.setPreffered(true);
@@ -374,7 +374,7 @@ public class EventsDAOI implements EventsDAO{
                             if (listPR != null && !listPR.isEmpty()) {
 
                                 Participation p = new Participation();
-                                p.setNormal_event(listPR.get(0).getId());
+                                p.setPrivate_recurent_event(listPR.get(0).getId());
                                 p.setOwn_end_time(listPR.get(0).getEnd_time());
                                 p.setOwn_start_time(listPR.get(0).getStart_time());
                                 p.setPreffered(true);
