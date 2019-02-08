@@ -884,7 +884,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Normal_Event e where p.user = '" + list.get(0).getId() + "'" +
                         " and p.normal_event=e.id and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -912,7 +914,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Private_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.private_event=e.id and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -960,7 +964,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.recurent_event=e.id and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
                     @SuppressWarnings("unchecked")
@@ -991,7 +997,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Private_Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.private_recurent_event=e.id and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1233,7 +1241,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Normal_Event e where p.user = '" + list.get(0).getId() + "'" +
                         " and p.normal_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1278,7 +1288,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Private_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.private_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -1343,7 +1355,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.recurent_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
                     @SuppressWarnings("unchecked")
@@ -1390,7 +1404,9 @@ public class EventsDAOI implements EventsDAO{
 
                 hql = "select e from Participation p, Private_Recurent_Event e where p.user = '" + list.get(0).getId() + "'" +
                         "and p.private_recurent_event=e.id and p.preffered = 'true' and ((e.start_date between '" + after +
-                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "'))";
+                        "' and '" + before + "') or (e.end_date between '" + after + "' and '" + before + "') " +
+                        "or ('" + after + "' between e.start_date and e.end_date) " +
+                        "or ('" + before + "' between e.start_date and e.end_date))";
                 try {
                     query = sessionFactory.getCurrentSession().createQuery(hql);
 
